@@ -1,14 +1,18 @@
 // src/server.js
 const express = require('express');
+const cors = require('cors');
 const { testConnection } = require('./db');
 const usersRouter = require('./routes/users');
+const rolesRouter = require('./routes/roles');
 require('dotenv').config();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // Rutas
 app.use('/api/users', usersRouter);
+app.use('/api/roles', rolesRouter);
 
 // Health check
 app.get('/', (req, res) => res.send('API funcionando'));
