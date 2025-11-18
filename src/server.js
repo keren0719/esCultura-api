@@ -4,15 +4,25 @@ const cors = require('cors');
 const { testConnection } = require('./db');
 const usersRouter = require('./routes/users');
 const rolesRouter = require('./routes/roles');
+const eventsRouter = require('./routes/events');
+const categoriesRouter = require('./routes/categories');
+const placesRouter = require('./routes/places');
+const reviewsRouter = require('./routes/reviews');
+
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 
 // Rutas
 app.use('/api/users', usersRouter);
 app.use('/api/roles', rolesRouter);
+app.use('/api/events', eventsRouter);
+app.use('/api/categories', categoriesRouter);
+app.use('/api/places', placesRouter);
+app.use('/api/reviews', reviewsRouter);
 
 // Health check
 app.get('/', (req, res) => res.send('API funcionando'));
